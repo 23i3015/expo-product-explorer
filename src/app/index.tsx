@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { View, Text, Button, StyleSheet } from "react-native";
+import { View, Text, Pressable, StyleSheet } from "react-native";
 
 export default function Index() {
-  const [message, setMessage] = useState("Welcome to Product Explorer");
+  const [screenText, setScreenText] = useState("Explore Products");
 
   return (
     <View style={styles.container}>
@@ -11,12 +11,14 @@ export default function Index() {
       <Text style={styles.info}>Name: Nabeeha Islam</Text>
       <Text style={styles.info}>Roll No: 23i3015</Text>
 
-      <Button
-        title="Explore Products"
-        onPress={() => setMessage("Products Loaded!")}
-      />
+      <Pressable
+        style={({ pressed }) => [styles.button, pressed && styles.buttonPressed]}
+        onPress={() => setScreenText("Products Loaded")}
+        accessibilityRole="button">
+        <Text style={styles.buttonText}>Load Products</Text>
+      </Pressable>
 
-      <Text style={styles.message}>{message}</Text>
+      <Text style={styles.message}>{screenText}</Text>
     </View>
   );
 }
@@ -40,8 +42,28 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
 
-  message: {
+  button: {
+    backgroundColor: "#007AFF",
+    paddingVertical: 12,
+    paddingHorizontal: 24,
+    borderRadius: 8,
+    marginTop: 12,
+    marginBottom: 12,
+  },
+
+  buttonPressed: {
+    opacity: 0.8,
+  },
+
+  buttonText: {
+    color: "#ffffff",
     fontSize: 16,
-    marginTop: 20,
+    fontWeight: "600",
+  },
+
+  message: {
+    fontSize: 18,
+    marginTop: 10,
+    fontWeight: "500",
   },
 });
